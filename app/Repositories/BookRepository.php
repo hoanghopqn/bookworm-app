@@ -25,6 +25,7 @@ class BookRepository
 
       return new BookCollection($query->getBookSale()->paginate($limit));
     }
+
     public function getRecommnad($request) {
         // return 'test';
          $query = Book::query();
@@ -49,6 +50,7 @@ class BookRepository
         // return 'test';
       return Book::getBookShop()->paginate(12);
     }
+
     public function getAllBook($request) {
     // return 'test';
           $query = Book::query();
@@ -68,7 +70,8 @@ class BookRepository
          }
 
       return new BookCollection($query->getAllBook()->paginate($limit));
-}
+    }
+
 public function getSortSale($request) {
     // return 'test';
          $query = Book::query();
@@ -85,7 +88,8 @@ public function getSortSale($request) {
          }
 
       return new BookCollection($query->getSortSale()->paginate($limit));
-}
+    }  
+
     public function getPopula($request) {
         // return 'test';
         $query = Book::query();
@@ -103,6 +107,7 @@ public function getSortSale($request) {
 
       return new BookCollection($query->getPopula()->paginate($limit));
     }
+
     public function getPriceHighLow($request) {
         // return 'test';
             $query = Book::query();
@@ -114,6 +119,7 @@ public function getSortSale($request) {
 
       return new BookCollection($book->getPriceHighLow()->paginate($limit));
     }
+
     public function getFilterCategory($request) {
         // return 'test';
             $query = Book::query();
@@ -122,7 +128,7 @@ public function getSortSale($request) {
             $book = $query->when($Sort,function ($query, $Sort){
             $query->where('category.category_name', '=', $Sort);
                 });
-                
+
       return new BookCollection($book->getFilterCategory()->paginate($limit));
     }
    
