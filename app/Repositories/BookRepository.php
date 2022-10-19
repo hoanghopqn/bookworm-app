@@ -43,24 +43,44 @@ public function getSortSale() {
         // return 'test';
         return Book::getPopula()->paginate(12);
     }
-    public function getPriceHighLow() {
+    public function getPriceHighLow($request) {
         // return 'test';
-        return Book::getPriceHighLow()->paginate(12);
+        $query = Book::query();
+    $limit = $request->input('limit');
+    $Sort = $request->input('Sort');
+    $book = $query->when($Sort,function ($query, $Sort){
+        $query->orderBy('sub_price',$Sort);
+    });
+  return new BookCollection($book->getPriceHighLow()->paginate($limit));
     }
-    public function getPriceLowHigh() {
+    public function getFilterCategory($request) {
         // return 'test';
-        return Book::getPriceLowHigh()->paginate(12);
+        $query = Book::query();
+        $limit = $request->input('limit');
+        $Sort = $request->input('Sort');
+        $book = $query->when($Sort,function ($query, $Sort){
+            $query->where('category.category_name', '=', $Sort);
+        });
+      return new BookCollection($book->getFilterCategory()->paginate($limit));
     }
-    public function getFilterCategory() {
+    public function getFilterAuthor($request) {
         // return 'test';
-        return Book::getFilterCategory()->paginate(12);
+        $query = Book::query();
+        $limit = $request->input('limit');
+        $Sort = $request->input('Sort');
+        $book = $query->when($Sort,function ($query, $Sort){
+            $query->where('author.author_name', '=', $Sort);
+        });
+      return new BookCollection($book->getFilterAuthor()->paginate($limit));
     }
-    public function getFilterAuthor() {
+    public function getFilterRatingReview($request) {
         // return 'test';
-        return Book::getFilterAuthor()->paginate(12);
-    }
-    public function getFilterRatingReview() {
-        // return 'test';
-        return Book::getFilterRatingReview()->paginate(12);
+        $query = Book::query();
+        $limit = $request->input('limit');
+        $Sort = $request->input('Sort');
+        $book = $query->when($Sort,function ($query, $Sort){
+            $query->havingRaw('avg(review.rating_start) >= ?',[$Sort]);
+        });
+      return new BookCollection($book->getFilterRatingReview()->paginate($limit));
     }
 }

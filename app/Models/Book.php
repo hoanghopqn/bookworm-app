@@ -90,6 +90,20 @@ class Book extends Model
         ->orderBy('discount_price', 'asc')
         ->orderBy('book_price', 'asc');
     }
+    public function scopeGetSortSale($query)
+    {
+    return $query
+    ->selectRaw(
+        '
+        book_title, 
+        book_price,
+        author.author_name,
+        book_cover_photo '
+    )
+    ->join('author', 'author.id', '=', 'book.author_id')
+    ->join('discount', 'discount.book_id', '=', 'book.id')
+    ->orderBy('discount.discount_price', 'desc');
+}
 
     public function scopeGetPopula($query)
     {
@@ -106,33 +120,8 @@ class Book extends Model
         ->groupByRaw('book_title,book_price,author.author_name,book_cover_photo')
         ->orderByRaw('count(review.rating_start) desc');
     }
-    public function scopeGetSortSale($query)
-    {
-    return $query
-    ->selectRaw(
-        '
-        book_title, 
-        book_price,
-        author.author_name,
-        book_cover_photo '
-    )
-    ->join('author', 'author.id', '=', 'book.author_id')
-    ->join('discount', 'discount.book_id', '=', 'book.id')
-    ->orderBy('discount.discount_price', 'desc');
-}
-    public function scopeGetPriceLowHigh($query)
-    {
-        return $query
-        ->selectRaw(
-            '
-        book_title, 
-        book_price,
-        author.author_name,
-        book_cover_photo '
-        )
-        ->join('author', 'author.id', '=', 'book.author_id')
-        ->orderBy('book.book_price' ,'asc');
-    }
+    
+    
     public function scopeGetPriceHighLow($query)
     {
         return $query
@@ -141,10 +130,21 @@ class Book extends Model
         book_title, 
         book_price,
         author.author_name,
-        book_cover_photo '
+        book_cover_photo ,
+        case
+        when discount.discount_start_date > now()  then book.book_price
+        when discount.discount_end_date < now()  then  book.book_price
+        when discount.discount_start_date <= now() and discount.discount_end_date >= now()
+         then discount.discount_price
+        when discount.discount_end_date is null and discount.discount_start_date <= now()
+         then discount.discount_price   
+        when discount.discount_end_date is null and discount.discount_start_date > now()
+         then book.book_price
+        end as sub_price'
         )
         ->join('author', 'author.id', '=', 'book.author_id')
-        ->orderBy('book.book_price' ,'desc');
+        ->join('discount', 'discount.book_id', '=', 'book.id')
+        ->orderBy('sub_price' ,'desc');
     }
 
     public function scopeGetFilterCategory($query)
@@ -159,6 +159,7 @@ class Book extends Model
         )
         ->join('author', 'author.id', '=', 'book.author_id')
         ->join('category', 'category.id', '=', 'book.category_id')
+        ->join('discount', 'discount.book_id', '=', 'book.id')
         ->where('category.category_name', '=', 'herman');
     }
 
@@ -184,11 +185,11 @@ class Book extends Model
         book_title, 
         book_price,
         author.author_name,
-        book_cover_photo '
+        book_cover_photo, avg(review.rating_start) as startsss '
         )
         ->join('author','author.id', '=', 'book.author_id')
         ->join('review','review.book_id', '=', 'book.id')
-        ->havingRaw('avg(review.rating_start) >= 2')
-        ->groupByRaw('book_title, book_price, author.author_name, book_cover_photo');
+        ->groupByRaw('book_title, book_price, author.author_name, book_cover_photo')
+        ->orderByRaw('avg(review.rating_start) asc');
     }
 }

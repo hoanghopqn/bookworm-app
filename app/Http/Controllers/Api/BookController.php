@@ -40,25 +40,21 @@ class BookController extends Controller
     {
         return $this->bookRepository->getPopula();
     }
-    public function getPriceHighLow()
+    public function getPriceHighLow(Request $request)
     {
-        return $this->bookRepository->getPriceHighLow();
+        return $this->bookRepository->getPriceHighLow($request);
     }
-    public function getPriceLowHigh()
+    public function getFilterCategory(Request $request)
     {
-        return new $this->bookRepository->getPriceLowHigh();
+        return $this->bookRepository->getFilterCategory($request);
     }
-    public function getFilterCategory()
+    public function getFilterAuthor(Request $request)
     {
-        return $this->bookRepository->getFilterCategory();
+        return $this->bookRepository->getFilterAuthor($request);
     }
-    public function getFilterAuthor()
+    public function getFilterRatingReview(Request $request)
     {
-        return $this->bookRepository->getFilterAuthor();
-    }
-    public function getFilterRatingReview()
-    {
-        return $this->bookRepository->getFilterRatingReview();
+        return $this->bookRepository->getFilterRatingReview($request);
     }
     /**
      * Show the form for creating a new resource.
