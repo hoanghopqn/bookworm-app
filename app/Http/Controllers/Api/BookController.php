@@ -9,42 +9,49 @@ use App\Http\Resources\BookCollection;
 
 class BookController extends Controller
 {
-    protected $bookRepository;   
+    protected $bookRepository;
     public function __construct(BookRepository $bookRepository)
     {
         $this->bookRepository = $bookRepository;
     }
     public function index()
     {
-        
     }
-    
+
     public function getBookSale(Request $request)
     {
-        return new BookCollection( $this->bookRepository->getBookSale($request));
+        return new BookCollection($this->bookRepository->getBookSale($request));
     }
-    public function getRecommnad(Request $request)
+
+    public function getRecommnad()
     {
-        return new BookCollection( $this->bookRepository->getRecommnad($request));
+        return new BookCollection($this->bookRepository->getRecommnad());
+    }
+    public function getPopular()
+    {
+        return new BookCollection($this->bookRepository->getPopular());
     }
 
     public function getAllBook(Request $request)
     {
-        return $this->bookRepository->getAllBook($request);
+        return new BookCollection($this->bookRepository->getAllBook($request));
     }
+
     public function getSortSale(Request $request)
     {
-        return $this->bookRepository->getSortSale($request);
+        return new BookCollection($this->bookRepository->getSortSale($request));
     }
+
     public function getPopula(Request $request)
     {
-        return $this->bookRepository->getPopula($request);
+        return new BookCollection($this->bookRepository->getPopula($request));
     }
+
     public function getPriceHighLow(Request $request)
     {
-        return $this->bookRepository->getPriceHighLow($request);
+        return new BookCollection($this->bookRepository->getPriceHighLow($request));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
