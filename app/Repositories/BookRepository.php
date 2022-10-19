@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\BookCollection;
 use App\Models\Book;
 
-class BookSaleRepository
+class BookRepository
 {
     public function getBookSale() {
         // return 'test';
@@ -19,11 +20,25 @@ class BookSaleRepository
         // return 'test';
         return Book::getBookShop()->paginate(12);
     }
-    public function getSortSale() {
-        // return 'test';
-        return Book::getSortSale()->paginate(12);
-    }
-
+    public function getAllBook($request) {
+    // return 'test';
+    $query = Book::query();
+    $limit = $request->input('limit');
+    // if ($Sort = $request->input('Sort')) {
+    //     $query->orderBy('discount_price',$Sort);
+    //     $query->orderBy('book_price',$Sort);
+    // }   
+    $Sort = $request->input('Sort');
+    $book = $query->when($Sort,function ($query, $Sort){
+        $query->orderBy('discount_price',$Sort);
+        $query->orderBy('book_price',$Sort);
+    });
+  return new BookCollection($book->getAllBook()->paginate($limit));
+}
+public function getSortSale() {
+    // return 'test';
+    return Book::getSortSale()->paginate(12);
+}
     public function getPopula() {
         // return 'test';
         return Book::getPopula()->paginate(12);

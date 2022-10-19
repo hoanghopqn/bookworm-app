@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\BookSaleRepository;
+use App\Repositories\BookRepository;
 use Illuminate\Http\Request;
+use App\Http\Resources\BookCollection;
 
 class BookController extends Controller
 {
-    protected $booksaleRepository;   
-    public function __construct(BookSaleRepository $booksaleRepository)
+    protected $bookRepository;   
+    public function __construct(BookRepository $bookRepository)
     {
-        $this->booksaleRepository = $booksaleRepository;
+        $this->bookRepository = $bookRepository;
     }
     public function index()
     {
@@ -20,45 +21,44 @@ class BookController extends Controller
     
     public function getBookSale()
     {
-        return $this->booksaleRepository->getBookSale();
+        return new BookCollection( $this->bookRepository->getBookSale());
     }
     public function getRecommnad()
     {
-        return $this->booksaleRepository->getRecommnad();
+        return new BookCollection( $this->bookRepository->getRecommnad());
     }
 
-    public function getBookShop()
+    public function getAllBook(Request $request)
     {
-        return $this->booksaleRepository->getBookShop();
+        return $this->bookRepository->getAllBook($request);
     }
     public function getSortSale()
     {
-        return $this->booksaleRepository->getSortSale();
+        return $this->bookRepository->getSortSale();
     }
-
     public function getPopula()
     {
-        return $this->booksaleRepository->getPopula();
+        return $this->bookRepository->getPopula();
     }
     public function getPriceHighLow()
     {
-        return $this->booksaleRepository->getPriceHighLow();
+        return $this->bookRepository->getPriceHighLow();
     }
     public function getPriceLowHigh()
     {
-        return $this->booksaleRepository->getPriceLowHigh();
+        return new $this->bookRepository->getPriceLowHigh();
     }
     public function getFilterCategory()
     {
-        return $this->booksaleRepository->getFilterCategory();
+        return $this->bookRepository->getFilterCategory();
     }
     public function getFilterAuthor()
     {
-        return $this->booksaleRepository->getFilterAuthor();
+        return $this->bookRepository->getFilterAuthor();
     }
     public function getFilterRatingReview()
     {
-        return $this->booksaleRepository->getFilterRatingReview();
+        return $this->bookRepository->getFilterRatingReview();
     }
     /**
      * Show the form for creating a new resource.
