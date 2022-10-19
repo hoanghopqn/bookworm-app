@@ -4,16 +4,44 @@ namespace App\Repositories;
 
 use App\Http\Resources\BookCollection;
 use App\Models\Book;
+use Psy\Readline\Hoa\Console;
 
 class BookRepository
 {
-    public function getBookSale() {
+    public function getBookSale($request) {
         // return 'test';
-        return Book::getBookSale()->paginate(10);
+        $query = Book::query();
+        $limit = $request->input('limit');
+        
+         if($category = $request->input('category')){
+            $query->where('category_name', $category);
+         }
+         if($author = $request->input('author')){
+            $query->where('author_name', $author);
+         }
+         if($startsss = $request->input('startsss')){
+            $query->whereRaw('COALESCE(AVG(CAST(rating_start as INT)), 0) >= ?', [$startsss]);
+         }
+      return new BookCollection($query->getBookSale()->paginate($limit));
     }
-    public function getRecommnad() {
+    public function getRecommnad($request) {
         // return 'test';
-        return Book::getRecommnad()->paginate(8);
+        $query = Book::query();
+        $price = $query
+                ->avg('price')
+                ->join('review', 'review.book_id', '=', 'book.id');
+        $limit = $request->input('limit');
+        
+         if($category = $request->input('category')){
+            $query->where('category_name', $category);
+         }
+         if($author = $request->input('author')){
+            $query->where('author_name', $author);
+         }
+         if($startsss = $request->input('startsss')){
+            $query->where($price,'>=', $startsss);
+         }
+      return new BookCollection($query->getRecommnad()->paginate($limit));
     }
 
     public function getBookShop() {
@@ -24,24 +52,52 @@ class BookRepository
     // return 'test';
     $query = Book::query();
     $limit = $request->input('limit');
-    // if ($Sort = $request->input('Sort')) {
-    //     $query->orderBy('discount_price',$Sort);
-    //     $query->orderBy('book_price',$Sort);
-    // }   
-    $Sort = $request->input('Sort');
-    $book = $query->when($Sort,function ($query, $Sort){
+    if ($Sort = $request->input('Sort')) {
         $query->orderBy('discount_price',$Sort);
         $query->orderBy('book_price',$Sort);
-    });
-  return new BookCollection($book->getAllBook()->paginate($limit));
+    }  
+    if($category = $request->input('category')){
+        $query->where('category_name', $category);
+     }
+     if($author = $request->input('author')){
+        $query->where('author_name', $author);
+     }
+     if($startsss = $request->input('startsss')){
+        $query->where('startsss','>=', $startsss);
+     }
+  return new BookCollection($query->getAllBook()->paginate($limit));
 }
-public function getSortSale() {
+public function getSortSale( $request) {
     // return 'test';
-    return Book::getSortSale()->paginate(12);
+    $query = Book::query();
+        $limit = $request->input('limit');
+        
+         if($category = $request->input('category')){
+            $query->where('category_name', $category);
+         }
+         if($author = $request->input('author')){
+            $query->where('author_name', $author);
+         }
+         if($startsss = $request->input('startsss')){
+            $query->whereRaw('COALESCE(AVG(CAST(rating_start as INT)), 0) >= ?', [$startsss]);
+         }
+      return new BookCollection($query->getSortSale()->paginate($limit));
 }
-    public function getPopula() {
+    public function getPopula($request) {
         // return 'test';
-        return Book::getPopula()->paginate(12);
+        $query = Book::query();
+        $limit = $request->input('limit');
+        
+         if($category = $request->input('category')){
+            $query->where('category_name', $category);
+         }
+         if($author = $request->input('author')){
+            $query->where('author_name', $author);
+         }
+         if($startsss = $request->input('startsss')){
+            $query->whereRaw('COALESCE(AVG(CAST(rating_start as INT)), 0) >= ?', [$startsss]);
+         }
+      return new BookCollection($query->getPopula()->paginate($limit));
     }
     public function getPriceHighLow($request) {
         // return 'test';
@@ -63,24 +119,5 @@ public function getSortSale() {
         });
       return new BookCollection($book->getFilterCategory()->paginate($limit));
     }
-    public function getFilterAuthor($request) {
-        // return 'test';
-        $query = Book::query();
-        $limit = $request->input('limit');
-        $Sort = $request->input('Sort');
-        $book = $query->when($Sort,function ($query, $Sort){
-            $query->where('author.author_name', '=', $Sort);
-        });
-      return new BookCollection($book->getFilterAuthor()->paginate($limit));
-    }
-    public function getFilterRatingReview($request) {
-        // return 'test';
-        $query = Book::query();
-        $limit = $request->input('limit');
-        $Sort = $request->input('Sort');
-        $book = $query->when($Sort,function ($query, $Sort){
-            $query->havingRaw('avg(review.rating_start) >= ?',[$Sort]);
-        });
-      return new BookCollection($book->getFilterRatingReview()->paginate($limit));
-    }
+   
 }
