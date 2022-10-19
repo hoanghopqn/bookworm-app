@@ -3,21 +3,63 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\BookRepository;
+use App\Repositories\BookSaleRepository;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    protected $bookRepository;   
-    public function __construct(BookRepository $bookRepository)
+    protected $booksaleRepository;   
+    public function __construct(BookSaleRepository $booksaleRepository)
     {
-        $this->bookRepository = $bookRepository;
+        $this->booksaleRepository = $booksaleRepository;
     }
     public function index()
     {
-        return $this->bookRepository->getBook();
+        
+    }
+    
+    public function getBookSale()
+    {
+        return $this->booksaleRepository->getBookSale();
+    }
+    public function getRecommnad()
+    {
+        return $this->booksaleRepository->getRecommnad();
     }
 
+    public function getBookShop()
+    {
+        return $this->booksaleRepository->getBookShop();
+    }
+    public function getSortSale()
+    {
+        return $this->booksaleRepository->getSortSale();
+    }
+
+    public function getPopula()
+    {
+        return $this->booksaleRepository->getPopula();
+    }
+    public function getPriceHighLow()
+    {
+        return $this->booksaleRepository->getPriceHighLow();
+    }
+    public function getPriceLowHigh()
+    {
+        return $this->booksaleRepository->getPriceLowHigh();
+    }
+    public function getFilterCategory()
+    {
+        return $this->booksaleRepository->getFilterCategory();
+    }
+    public function getFilterAuthor()
+    {
+        return $this->booksaleRepository->getFilterAuthor();
+    }
+    public function getFilterRatingReview()
+    {
+        return $this->booksaleRepository->getFilterRatingReview();
+    }
     /**
      * Show the form for creating a new resource.
      *

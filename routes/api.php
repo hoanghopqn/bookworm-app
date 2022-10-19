@@ -18,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/get-book', BookController::class);
+Route::get('/get-book-sale', [BookController::class, 'getBookSale']);
+Route::get('/get-book', [BookController::class, 'getRecommnad']);
+Route::get('/get-book-shop', [BookController::class, 'getBookShop']);
+Route::get('/get-Sort-Sale', [BookController::class, 'getSortSale']);
+Route::get('/get-Popula', [BookController::class, 'getPopula']);
+Route::get('/get-Price-High-Low', [BookController::class, 'getPriceHighLow']);
+Route::get('/get-Price-Low-High', [BookController::class, 'getPriceLowHigh']);
+Route::get('/get-Filter-Category', [BookController::class, 'getFilterCategory']);
+Route::get('/get-Filter-Author', [BookController::class, 'getFilterAuthor']);
+Route::get('/get-Filter-Rating-Review', [BookController::class, 'getFilterRatingReview']);

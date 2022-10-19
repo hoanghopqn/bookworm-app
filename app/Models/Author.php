@@ -11,4 +11,9 @@ class Author extends Model
 
     public $timestamps = false;
     protected $table = 'author';
+    public $fillable = [
+        'author_name',
+        'author_bio'
+
+    ];
 }
