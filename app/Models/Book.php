@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Psy\Readline\Hoa\Console;
 
 class Book extends Model
 {
@@ -24,6 +25,7 @@ class Book extends Model
 
     public function scopeGetDetail($query)
     {
+        
         return $query
             ->leftJoin('author', 'author.id', '=', 'book.author_id')
             ->leftJoin('category', 'category.id', '=', 'book.category_id')
@@ -41,148 +43,45 @@ class Book extends Model
                 'discount.discount_end_date'
             )
             ->selectRaw(
-                'COALESCE(AVG(CAST(rating_start as INT)), 0)  as start'
+                'COALESCE(AVG(CAST(rating_start as INT)), 0)  as avg_stars,
+                CASE
+            WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN  discount.discount_price
+            WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN discount.discount_price
+            ELSE book.book_price
+            END as final_price,
+            COUNT(CAST(rating_start as INT)) as count_review,
+            CASE
+            WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount.discount_start_date) THEN book.book_price - discount.discount_price
+            WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN book.book_price - discount.discount_price
+            ELSE 0
+            END as sub_price'
             )
             ->groupBy(
                 'book.id',
                 'discount.id',
                 'author.id',
                 'review.book_id',
-                'category.id'
+                'category.id',
+                'final_price'
             );
     }
     //giảm dần theo chiết khấu
-    public function scopeSupPrice($query)
+    public function scopeSupPrice($query, $sort)
     {
-        return $query->orderByRaw('CASE
-        WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount.discount_start_date) THEN book.book_price - discount.discount_price
-        WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN book.book_price - discount.discount_price
-        ELSE 0
-        END DESC ');
+        return $query->orderBy('sub_price', $sort);
     }
-    
+
     //tăng dần theo giá thực
-    public function scopePrice($query)
+    public function scopePrice($query, $priceF)
     {
-        return $query->orderByRaw('CASE
-        WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN  discount.discount_price
-        WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN discount.discount_price
-        ELSE book.book_price
-        END asc');
+        return $query->orderBy('final_price', $priceF);
     }
-    public function scopeStarts($query)
+    public function scopeAvgStarts($query)
     {
-        return $query->orderByRaw('count(review.rating_start) desc');
+        return $query->orderBy('avg_stars', 'desc');
     }
-    public function scopeGetRecommend($query)
+    public function scopeCountReview($query)
     {
-        return $query
-            ->orderBy('start', 'desc')
-            ->orderByRaw('CASE
-        WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN  discount.discount_price
-        WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN discount.discount_price
-        ELSE book.book_price
-        END asc');
-    }
-    public function scopeGetPopular($query)
-    {
-        return $query
-            ->orderByRaw('count(CAST(review.rating_start as INT)) desc ');
-    }
-    public function scopeGetBooksAll($query)
-    {
-        return $query
-            ->orderBy('discount_price', 'asc')
-            ->orderBy('book_price', 'asc');
-    }
-
-   
-    // public function scopeGetSortSale($query)
-    // {
-    //     return $query
-    //         ->orderByRaw('CASE
-    //     WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount.discount_start_date) THEN book.book_price - discount.discount_price
-    //     WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN book.book_price - discount.discount_price
-    //     ELSE 0
-    //     END DESC')
-    //         ->orderBy('book.book_price', 'desc');
-    // }
-    public function scopeGetPopula($query)
-    {
-        return $query->selectRaw(
-            'book_title,
-                                  book_price,
-                                  author.author_name,
-                                  book_cover_photo,count(review.rating_start) '
-        )
-            ->join('author', 'author.id', '=', 'book.author_id')
-            ->join('review', 'review.book_id', '=', 'book.id')
-            ->groupByRaw('book_title,book_price,author.author_name,book_cover_photo')
-            ->orderByRaw('count(review.rating_start) desc');
-    }
-
-    public function scopeGetPriceHighLow($query)
-    {
-        return $query->selectRaw(
-            'book_title,
-                                  book_price,
-                                  author.author_name,
-                                  book_cover_photo,
-                                case
-                                  when discount.discount_start_date > now() 
-                                       then book.book_price
-                                  when discount.discount_end_date < now()  
-                                       then  book.book_price
-                                  when discount.discount_start_date <= now() and discount.discount_end_date >= now()
-                                       then discount.discount_price
-                                  when discount.discount_end_date is null and discount.discount_start_date <= now()
-                                       then discount.discount_price
-                                  when discount.discount_end_date is null and discount.discount_start_date > now()
-                                       then book.book_price
-                                  end as sub_price'
-        )
-            ->join('author', 'author.id', '=', 'book.author_id')
-            ->join('category', 'category.id', '=', 'book.category_id')
-            ->join('discount', 'discount.book_id', '=', 'book.id')
-            ->join('review', 'review.book_id', '=', 'book.id')
-            ->groupByRaw('book_title,
-                                   book_price,
-                                   discount.discount_price,
-                                   book_cover_photo,
-                                   discount.discount_start_date,
-                                   discount.discount_end_date,
-                                   author.author_name,
-                                   category.category_name,
-                                   sub_price')
-            ->orderBy('sub_price', 'desc');
-    }
-
-    public function scopeBookDetails($query)
-    {
-        return $query->selectRaw(
-            ' book_title,
-                                       book_price,
-                                       discount.discount_price,
-                                       book_cover_photo,
-                                       discount.discount_start_date,
-                                       discount.discount_end_date,
-                                       author.author_name,
-                                       category.category_name,
-                                       case
-                                            when discount.discount_start_date > now()  then book.book_price
-                                            when discount.discount_end_date < now()  then  book.book_price
-                                            when discount.discount_start_date <= now() and discount.discount_end_date >= now()
-                                                 then discount.discount_price
-                                            when discount.discount_end_date is null and discount.discount_start_date <= now()
-                                                 then discount.discount_price
-                                            when discount.discount_end_date is null and discount.discount_start_date > now()
-                                                 then book.book_price
-                                        end as sub_price,
-                                        count(CAST(rating_start as INT)) '
-        )
-            ->leftJoin('author', 'author.id', '=', 'book.author_id')
-            ->leftJoin('category', 'category.id', '=', 'book.category_id')
-            ->leftJoin('discount', 'discount.book_id', '=', 'book.id')
-            ->leftJoin('review', 'review.book_id', '=', 'book.id');
+        return $query->orderBy('count_review', 'desc');
     }
 }

@@ -17,6 +17,10 @@ class Review extends Model
         'review_details',
         'review_date',
         'rating_start'
-
     ];
+
+    public function scopeGetReviewDetails($query)
+    {
+        // $query = Review::where('review_id',''
+    }
 }

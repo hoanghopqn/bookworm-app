@@ -3,41 +3,32 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\BookRepository;
+use App\Http\Resources\ReviewCollection;
+use App\Repositories\ReviewRepository;
 use Illuminate\Http\Request;
-use App\Http\Resources\BookCollection;
 
-class BookController extends Controller
+class ReviewController extends Controller
 {
-    protected $bookRepository;
-    public function __construct(BookRepository $bookRepository)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected $reviewRepository;
+
+    public function __construct(ReviewRepository $reviewRepository)
     {
-        $this->bookRepository = $bookRepository;
+           $this->reviewRepository = $reviewRepository;
+    }
+
+    public function getReviewDetails(Request $request)
+    {
+      return new ReviewCollection($this->reviewRepository->getReviewDetails($request));
     }
     public function index()
     {
+        //
     }
-
-    public function getBookSale(Request $request)
-    {
-        return new BookCollection($this->bookRepository->getBookSale($request));
-    }
-
-    public function getRecommend(Request $request)
-    {
-        return new BookCollection($this->bookRepository->getRecommend($request));
-    }
-    public function getPopular(Request $request)
-    {
-        return new BookCollection($this->bookRepository->getPopular($request));
-    }
-
-    public function getBooksAll(Request $request)
-    {
-        return new BookCollection($this->bookRepository->getBooksAll($request));
-    }
-
-
 
     /**
      * Show the form for creating a new resource.
