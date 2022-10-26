@@ -34,6 +34,7 @@ class Book extends Model
             ->select(
                 'book.id',
                 'book.book_title',
+                'book.book_summary',
                 'book.book_price',
                 'book.book_cover_photo',
                 'author.author_name',
@@ -42,46 +43,41 @@ class Book extends Model
                 'discount.discount_start_date',
                 'discount.discount_end_date'
             )
-            ->selectRaw(
-                'COALESCE(AVG(CAST(rating_start as INT)), 0)  as avg_stars,
-                CASE
-            WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN  discount.discount_price
-            WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN discount.discount_price
-            ELSE book.book_price
-            END as final_price,
-            COUNT(CAST(rating_start as INT)) as count_review,
-            CASE
-            WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount.discount_start_date) THEN book.book_price - discount.discount_price
-            WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) THEN book.book_price - discount.discount_price
-            ELSE 0
-            END as sub_price'
-            )
             ->groupBy(
                 'book.id',
                 'discount.id',
                 'author.id',
                 'review.book_id',
-                'category.id',
-                'final_price'
+                'category.id'
             );
     }
+  
     //giảm dần theo chiết khấu
     public function scopeSupPrice($query, $sort)
     {
-        return $query->orderBy('sub_price', $sort);
+        return $query->orderByRaw('CASE
+        WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount.discount_start_date) AND discount.discount_start_date IS NOT NULL THEN book.book_price - discount.discount_price
+        WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) AND discount.discount_start_date IS NOT NULL THEN book.book_price - discount.discount_price
+        ELSE 0
+        END '.$sort);
     }
 
     //tăng dần theo giá thực
     public function scopePrice($query, $priceF)
     {
-        return $query->orderBy('final_price', $priceF);
+        return $query->orderByRaw('CASE
+        WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) AND discount.discount_start_date IS NOT NULL THEN  discount.discount_price
+        WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) AND discount.discount_start_date IS NOT NULL THEN discount.discount_price
+        ELSE book.book_price
+        END ' . $priceF);
     }
     public function scopeAvgStarts($query)
     {
-        return $query->orderBy('avg_stars', 'desc');
+        return $query->orderByRaw('COALESCE(AVG(CAST(rating_start as INT)), 0) desc');
     }
-    public function scopeCountReview($query)
+    public function scopeCountStars($query)
     {
-        return $query->orderBy('count_review', 'desc');
+        return $query->orderByRaw('COUNT(CAST(rating_start as INT)) desc');
     }
+    
 }

@@ -19,8 +19,24 @@ class Review extends Model
         'rating_start'
     ];
 
-    public function scopeGetReviewDetails($query)
+    public function scopeReviewDetails($query)
     {
-        // $query = Review::where('review_id',''
+        return $query
+            ->select(
+                'id',
+                'book_id',
+                'review_title',
+                'review_details',
+                'rating_start',
+                'review_date'
+            );
+    }
+    // public function scopeAvg_Starts($query,$id)
+    // {
+    //     return $query->avg('rating_start');
+    // }
+    public function scopeCountt($query,$star)
+    {
+        return $query->where('rating_start',$star)->count('rating_start');
     }
 }

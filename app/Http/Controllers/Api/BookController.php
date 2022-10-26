@@ -20,21 +20,21 @@ class BookController extends Controller
 
     public function getBookSale(Request $request)
     {
-        return new BookCollection($this->bookRepository->getBookSale($request));
+        return $this->bookRepository->getBookSale($request);
     }
 
     public function getRecommend(Request $request)
     {
-        return new BookCollection($this->bookRepository->getRecommend($request));
+        return $this->bookRepository->getRecommend($request);
     }
     public function getPopular(Request $request)
     {
-        return new BookCollection($this->bookRepository->getPopular($request));
+        return $this->bookRepository->getPopular($request);
     }
 
     public function getBooksAll(Request $request)
     {
-        return new BookCollection($this->bookRepository->getBooksAll($request));
+        return $this->bookRepository->getBooksAll($request);
     }
 
 
