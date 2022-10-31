@@ -1,0 +1,88 @@
+.Main-container{  
+    display: block;
+    .Product-container{  
+        display: flex;
+        .Checkbox-container{ 
+            display: block !important;
+            .Product-Checkbox{
+                max-width: 180px;
+                border: 2px solid black;
+                margin-top: 2%;
+                width: 100%;   
+                .Checkbox-text{
+                
+                    font-size: 22px;
+                    font-weight: bold;
+                    
+                }
+                .single-Checkbox{ 
+                   padding-right: 10px;  
+                }
+            }
+        }
+        .feature-product{
+          margin-top: 2%;
+          max-width: 1200px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap; 
+      margin-left: 2%;
+          .single-product{
+            flex-basis: 25%;
+            padding-left: 10px;
+            padding-right: 10px; 
+            box-sizing: border-box;
+    
+            .product-top{
+              position: relative;
+              display: block;
+              overflow: hidden;
+              &:hover a.product-img{
+                filter: opacity(85%);
+              }
+              .product-img{
+                display: block;
+                img{ 
+                        
+                  max-width: 100% !important;
+                  height: auto;   
+                  display: block !important;
+                  align-items: flex-end !important;
+                  justify-content: center !important;
+                  border-radius: 8px;
+              
+              }
+              }
+              .buy-product{
+                text-transform: uppercase;
+                text-align: center;
+                display: block;
+                background-color: aqua;
+                color: #fff; 
+                padding: 4px 0;
+                position: absolute;
+                width: 100%;
+                bottom: -45px;
+                border-radius: 8px;
+                transition: 0.25 ease-in-out;
+                opacity: 0.85;
+              }
+              &:hover a.buy-product{
+                bottom: 0;
+              }
+            }
+            
+            .product-info{
+              a{
+                display: block;
+                text-decoration: none;
+      
+              }
+            }
+          
+          }
+
+        }
+    }
+    
+}

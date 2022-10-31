@@ -1,0 +1,39 @@
+.about-us{
+    margin-top: 6.5%; 
+    margin-bottom: 13.4%; 
+    .about-us__container{  
+        height: 100%; 
+        .about-us-title{
+            margin-left: 20%;
+        } 
+        .about-us-body{   
+            
+  border-top: 0.5px solid rgb(8, 8, 8);
+            display: block; 
+            margin-top: 20px;
+           margin-left: 20%;
+           margin-right: 20%;
+            .about-us-welcom{
+                text-align: center; 
+                p{
+                    font-size: large;
+                }
+                flex: 1;
+            }
+            .about-us-our{   
+                justify-content: space-evenly;
+                display: flex;  
+                .about-us-story{
+                    padding: 0 25px;
+                  flex: 1; 
+                }
+                .about-us-vision{
+                    padding: 0 15px;
+                    flex: 1; 
+
+                }
+            }
+                }
+
+            }
+        }

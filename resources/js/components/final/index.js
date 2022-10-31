@@ -1,8 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import img from "../../assets/bookworm_icon.svg"
+import React from 'react' 
+import img from "../../../assets/bookworm_icon.svg"
 
-export const Final = () => {
+export default function FinalComponent() {
   return (
     <div className="final">
             <div className="final-BW">

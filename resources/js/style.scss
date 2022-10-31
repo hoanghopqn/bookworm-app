@@ -1,11 +1,11 @@
 header {
-    
-    position: absolute;
+     
      .navbar {
         background-color: rgba(136, 136, 123, 0.927);
         position: fixed;
         top: 0;
         left: 0;  
+        z-index: 10;
         width: 100%; 
         display: flex;
         border-bottom-style: solid;

@@ -1,11 +1,10 @@
 import React from "react"; 
-import {Tabs, Tab, AppBar} from "@material-ui/core"
-import './feature.scss';
+import {Tabs, Tab} from "@material-ui/core"
+import './style.scss';
 
-export const Feature = () => {
+export default function FeatureComponent() {
     const [value, setValue]=React.useState(0)
-    const handleTabs =(e,val)=>{
-        console.warn(val)
+    const handleTabs =(e,val)=>{ 
           setValue(val)
     }
   return (
@@ -28,9 +27,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -42,9 +45,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -55,23 +62,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
-        <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
-          </div>
-       </div>
        
-       
-       <div className="single-product"> 
-        <div className="product-top">
-          <a  className="product-img">
-           <img src="http://placekitten.com/g/400/200" /> 
-          </a>
-          <a className="buy-product">ADD</a>
-        </div>
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -83,9 +80,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -97,22 +98,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
-        <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
-          </div>
-       </div>
        
-       <div className="single-product"> 
-        <div className="product-top">
-          <a  className="product-img">
-           <img src="http://placekitten.com/g/400/200" /> 
-          </a>
-          <a className="buy-product">ADD</a>
-        </div>
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -124,9 +116,30 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
+          </div>
+       </div>
+       
+       <div className="single-product"> 
+        <div className="product-top">
+          <a  className="product-img">
+           <img src="http://placekitten.com/g/400/200" /> 
+          </a>
+          <a className="buy-product">ADD</a>
+        </div>
+       
+        <div className="product-info">
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -138,9 +151,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -152,9 +169,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -166,9 +187,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -180,9 +205,13 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        
@@ -194,9 +223,31 @@ export const Feature = () => {
           </a>
           <a className="buy-product">ADD</a>
         </div>
+       
         <div className="product-info">
-            <a>nguyen ngoc huu</a>
-            <a>nguyen ngoc huu</a>
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
+          </div>
+       </div>
+       
+       
+       <div className="single-product"> 
+        <div className="product-top">
+          <a  className="product-img">
+           <img src="http://placekitten.com/g/400/200" /> 
+          </a>
+          <a className="buy-product">ADD</a>
+        </div>
+       
+        <div className="product-info">
+            <a className="book-title">nguyen</a>
+            <a className="author-name">nguyen ngoc</a>
+          </div> 
+          <div className="product-price">
+            <a>120</a> 
           </div>
        </div>
        </div>
