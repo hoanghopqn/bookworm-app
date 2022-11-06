@@ -27,8 +27,8 @@ class BookRepository
       if ($author = $request->input('author')) {
          $query->where('author.id', $author);
       }
-      if ($stars = $request->input('stars')) {
-         $query->havingRaw('COALESCE(AVG(CAST(review.rating_start as INT)), 0) >= ?', $stars);
+      if ($star = $request->input('star')) {
+         $query->havingRaw('COALESCE(AVG(CAST(review.rating_start as INT)), 0) >= ?', [$star]);
       }
       $query = $query->paginate($limit);
       $query = new BookCollection($query);
@@ -54,8 +54,8 @@ class BookRepository
       if ($author = $request->input('author')) {
          $query->where('author.id', $author);
       }
-      if ($stars = $request->input('stars')) {
-         $query->havingRaw('COALESCE(AVG(CAST(review.rating_start as INT)), 0) >= ?', $stars);
+      if ($star = $request->input('star')) {
+         $query->havingRaw('COALESCE(AVG(CAST(review.rating_start as INT)), 0) >= ?', [$star]);
       }
       $query = $query->paginate($limit);
       $query = new BookCollection($query);
@@ -78,8 +78,8 @@ class BookRepository
       if ($author = $request->input('author')) {
          $query->where('author.id', $author);
       }
-      if ($stars = $request->input('stars')) {
-         $query->havingRaw('COALESCE(AVG(CAST(review.rating_start as INT)), 0) >= ?', $stars);
+      if ($star = $request->input('star')) {
+         $query->havingRaw('COALESCE(AVG(CAST(review.rating_start as INT)), 0) >= ?', [$star]);
       }
       $query = $query->paginate($limit);
       $query = new BookCollection($query);

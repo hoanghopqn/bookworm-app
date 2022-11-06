@@ -1,10 +1,10 @@
 import React from 'react'
-import AboutComponent from "../components/about"; 
+import FindCard from "../components/about"; 
 
 export const About = () => {
   return (
     <>
-        <AboutComponent/>
+        <FindCard/>
     </>
   )
 }

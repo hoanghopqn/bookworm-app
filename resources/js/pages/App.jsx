@@ -1,18 +1,22 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";  
-import { Home } from "./Home";  
+import Home from "./Home";  
 import { About } from "./About";  
+import { Shop } from "./Shop";  
+import { Card } from "./Card";  
 import HeaderComponent from "../components/header"; 
-import FinalComponent from "../components/final"; 
+import FinalComponent from "../components/final";  
 
-export const App = () => {
+export default function App(){
     return(
       <React.Fragment>
       <HeaderComponent/> 
       <div className="App" >
         <Routes> 
-        <Route path="/"element={<Home />} />  
-        <Route path="/about" element={<About />} />  
+        <Route path="/"element={<Home/>} />  
+        <Route path="/about" element={<About />} />   
+        <Route path="/shop" element={<Shop />} />  
+        <Route path="/shop/Card" element={<Card />} />  
         </Routes>
       </div>
       <FinalComponent/> 

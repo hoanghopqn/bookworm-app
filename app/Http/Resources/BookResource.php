@@ -41,6 +41,7 @@ class BookResource extends JsonResource
                 $sub_price =round($this->book_price - $this->discount_price, 2);
             }
         } 
+         
         $countstar1 = Review::where('book_id', $this->id)->where('rating_start', 1)->count('rating_start');
         $countstar2 = Review::where('book_id', $this->id)->where('rating_start', 2)->count('rating_start');
         $countstar3 = Review::where('book_id', $this->id)->where('rating_start', 3)->count('rating_start');

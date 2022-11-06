@@ -16,6 +16,7 @@ class Discount extends Model
     {
         return $this->belongsTo(Book::class);
     }
+    
     public $fillable = [
         'book_id',
         'discount_start_date',

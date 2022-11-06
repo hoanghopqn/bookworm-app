@@ -22,10 +22,29 @@ class Book extends Model
 
     ];
 
-
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function discounts()
+    {
+        return $this->hasOne(Discount::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function orderItems()
+    {
+        return $this->hasMany(Review::class);
+    }
     public function scopeGetDetail($query)
     {
-        
+
         return $query
             ->leftJoin('author', 'author.id', '=', 'book.author_id')
             ->leftJoin('category', 'category.id', '=', 'book.category_id')
@@ -51,7 +70,7 @@ class Book extends Model
                 'category.id'
             );
     }
-  
+
     //giảm dần theo chiết khấu
     public function scopeSupPrice($query, $sort)
     {
@@ -59,7 +78,7 @@ class Book extends Model
         WHEN (discount.discount_end_date IS NULL AND DATE(NOW()) >= discount.discount_start_date) AND discount.discount_start_date IS NOT NULL THEN book.book_price - discount.discount_price
         WHEN (discount.discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount.discount_start_date AND DATE(NOW()) <= discount.discount_end_date ) ) AND discount.discount_start_date IS NOT NULL THEN book.book_price - discount.discount_price
         ELSE 0
-        END '.$sort);
+        END ' . $sort);
     }
 
     //tăng dần theo giá thực
@@ -79,5 +98,4 @@ class Book extends Model
     {
         return $query->orderByRaw('COUNT(CAST(rating_start as INT)) desc');
     }
-    
 }

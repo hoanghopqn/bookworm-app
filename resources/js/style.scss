@@ -1,23 +1,23 @@
 header {
-     
      .navbar {
         background-color: rgba(136, 136, 123, 0.927);
         position: fixed;
         top: 0;
-        left: 0;  
+        left: 0; 
         z-index: 10;
         width: 100%; 
         display: flex;
         border-bottom-style: solid;
         justify-content: space-between; 
-        
         padding: 10px; 
         .navbar-collapse { 
             padding: 10px; 
-            margin-right: 5rem;
+            
+            margin-left: 40%;
             .nav-link {
-                padding: 1rem;
+                padding: 1rem; 
                 margin-left: 1rem;
+                justify-content: center;
                 color: rgba(11, 11, 10, 0.927); 
                  text-decoration: none;
             }

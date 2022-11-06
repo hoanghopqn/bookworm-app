@@ -1,10 +1,10 @@
 import React from 'react'
-// import { Shop } from "../components/P"; 
+import ProductComponent from "../components/product/Product"; 
 
 export const Shop = () => {
   return (
     <>
-    {/* <Shop/> */}
+    <ProductComponent/>
     </>
   )
 }
