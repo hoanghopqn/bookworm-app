@@ -12,8 +12,16 @@ class Author extends Model
     public $timestamps = false;
     protected $table = 'author';
     public $fillable = [
-        'author_name',
-        'author_bio'
+         'id',
+        'author_name'
 
     ];
+    public function scopeAuthor($query)
+    {
+        return $query
+            ->select(
+                'id',
+                'author_name' 
+            );
+    }
 }

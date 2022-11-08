@@ -1,10 +1,12 @@
 import React from 'react'
-import FindCard from "../components/about"; 
+import AboutComponent from "../components/about"; 
 
 export const About = () => {
+    
+    
   return (
     <>
-        <FindCard/>
+        <AboutComponent/>
     </>
   )
 }

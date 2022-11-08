@@ -13,8 +13,16 @@ class Category extends Model
 
     protected $table = 'category';
     public $fillable = [
-        'category_name',
-        'category_desc'
+         'id',
+        'category_name'
 
     ];
+    public function scopeCategory($query)
+    {
+        return $query
+            ->select(
+                'id',
+                'category_name' 
+            );
+    }
 }

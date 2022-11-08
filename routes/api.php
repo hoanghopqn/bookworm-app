@@ -24,3 +24,5 @@ Route::get('/get-recommend', [BookController::class, 'getRecommend']);
 Route::get('/get-popular', [BookController::class, 'getPopular']);
 Route::get('/get-books-all', [BookController::class, 'getBooksAll']);
 Route::get('/get-review/{id}', [ReviewController::class, 'getReviewDetails']);
+Route::get('/get-book/{id}', [BookController::class, 'getBookDetails']);
+Route::get('/get-author-category', [BookController::class, 'getAuthorCategory']);

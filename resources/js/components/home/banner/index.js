@@ -4,6 +4,7 @@ import "./style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardBook from "../../CardBook";
+import { Link } from "react-router-dom";
 
 export default function BannerComponent(props) {
     let settings = {
@@ -13,11 +14,11 @@ export default function BannerComponent(props) {
         slidesToShow: 4,
         slidesToScroll: 4,
     };
-    const { saleBooks } = props; 
+    const { saleBooks } = props;
     const slides = saleBooks.map((book, index) => {
         return (
             <div className="single-product">
-                <CardBook detailBook={book}/>
+                <CardBook detailBook={book} />
             </div>
         );
     });
@@ -26,13 +27,15 @@ export default function BannerComponent(props) {
             <div className="Banner-Container">
                 <div className="Banner-header">
                     <span className="Banner-title">On Sale</span>
-                    <button className="Banner-btn">viewAll</button>
+                    <div className="Banner-btn">
+                        <Link to={"/shop"}>
+                            <button>viewAll</button>
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="Banner-body">
-                    <Slider {...settings}>
-                        {slides}
-                    </Slider>
+                    <Slider {...settings}>{slides}</Slider>
                 </div>
             </div>
         </div>

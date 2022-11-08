@@ -1,0 +1,72 @@
+.Single-Review{
+      
+      margin-top: 10px;
+      margin-left: 200px;
+      margin-right: 200px;
+      display: flex;
+    .main-Review{ 
+      display: block;  
+      border: 2px solid black; 
+      width: 600px ;
+        .header-Review{
+            margin-top: 20px;
+            margin-left: 30px;
+            .customer-Reviews{
+                  font-weight: bold;
+
+      }
+            .avg-star{ 
+                  font-weight: bold;
+
+      }
+      .review-fillter{
+            display: flex; 
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .showing{ 
+            }
+            .select{ 
+                  margin-left: 85px;
+                  .select-show{
+                        margin-left: 30px;
+                  }
+            }
+
+      }
+            .star-Review{
+                  display: flex;
+         .count-star{
+            display: flex;
+
+         }
+      }
+        }
+        .body-Review{
+            margin: 20px;
+            .Review-title{
+                  font-weight: bold;
+                  display: flex;
+                  font-size: 16px;
+
+            }
+        }
+    }
+    .Review{
+          width: 250px;
+      height: 200px;
+      display: block; 
+      border: 2px solid black; 
+      margin-left: 100px; 
+            .review-write{
+                  border-bottom: 2px solid black; 
+                  margin-bottom: 10px;
+                  font-weight: bold;
+            } 
+            .review-text{
+
+            }
+            .button{
+                  margin: 10px 60px;
+            }
+  }
+    }

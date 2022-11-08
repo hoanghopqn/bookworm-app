@@ -1,0 +1,61 @@
+.Single-cardbook{
+    display: flex;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 200px; 
+    margin-bottom: 30px;
+    .main-cardbook{
+        max-width: 800px; 
+        display: flex;
+        border: 2px solid black;
+        .header-cardbook{
+            height: 450px; 
+            .image-cardbook{
+                width: 250px ;
+                height: 300px; 
+            }
+            .author-cardbook{
+                float: right;
+                margin-right:  30px;
+            }
+        }
+        .body-cardbook{
+            margin-top: 17px;
+            width: 350px;
+          .cardbook-title{
+              font-size: 20px;
+              font-weight:bold;
+    
+          }
+          .cardbook-text{
+            float: left;
+            font-size: 15px;
+    
+          }
+        }
+
+    }
+    .price-cardbook{
+        width: 250px;
+        height: 300px;
+        display: block;
+        margin-left: 100px; 
+        border: 2px solid black;
+        .price{
+            font-size: 15px;
+            .style-price{
+                text-decoration:line-through !important;
+                margin-right: 20px !important;
+                color: black !important;
+            }
+            .discount_price{
+                display: none;
+            }
+            .discount{
+                text-decoration: none;
+                color: black !important;
+            }
+        }
+
+    }
+}

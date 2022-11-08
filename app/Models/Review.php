@@ -12,6 +12,7 @@ class Review extends Model
     public $timestamps = false;
     protected $table = 'review';
     public $fillable = [
+        'id',
         'book_id',
         'review_title',
         'review_details',
@@ -29,14 +30,10 @@ class Review extends Model
                 'review_details',
                 'rating_start',
                 'review_date'
-            );
+            ) ;
     }
-    // public function scopeAvg_Starts($query,$id)
-    // {
-    //     return $query->avg('rating_start');
-    // }
-    public function scopeCountt($query,$star)
+    public function scopeReviewDate($query)
     {
-        return $query->where('rating_start',$star)->count('rating_start');
+        return $query->orderBy('review_date ','desc');
     }
 }

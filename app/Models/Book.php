@@ -58,6 +58,8 @@ class Book extends Model
                 'book.book_cover_photo',
                 'author.author_name',
                 'category.category_name',
+                'book.category_id',
+                'book.author_id',
                 'discount.discount_price',
                 'discount.discount_start_date',
                 'discount.discount_end_date'
@@ -66,6 +68,8 @@ class Book extends Model
                 'book.id',
                 'discount.id',
                 'author.id',
+                'book.category_id',
+                'book.author_id',
                 'review.book_id',
                 'category.id'
             );

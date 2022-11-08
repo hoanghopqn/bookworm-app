@@ -37,8 +37,15 @@ class BookController extends Controller
         return $this->bookRepository->getBooksAll($request);
     }
 
-
-
+    public function getBookDetails($id)
+    {
+        return $this->bookRepository->getBookDetails($id);
+    }
+    public function getAuthorCategory()
+    {
+        return $this->bookRepository->getAuthorCategory();
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -21,9 +21,9 @@ class ReviewController extends Controller
            $this->reviewRepository = $reviewRepository;
     }
 
-    public function getReviewDetails(Request $request,$id)
+    public function getReviewDetails($id)
     {
-      return $this->reviewRepository->getReviewDetails($request,$id);
+      return $this->reviewRepository->getReviewDetails($id);
     }
     public function index()
     {

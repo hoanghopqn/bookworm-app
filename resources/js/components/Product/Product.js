@@ -4,6 +4,7 @@ import CardBook from "../CardBook";
 import * as bookServices from "../../apiServices/bookServices";
 import "./Product.scss";
 import { isNull } from "lodash";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 export default function ProductComponent(props) {
     const [selectsorts, setSelectsSorts] = useState();
     const [selectShow, setSelectShow] = useState();
@@ -13,7 +14,10 @@ export default function ProductComponent(props) {
     const [urllshow, setUrlshow] = useState("15");
     const [urll, setUrl] = useState("get-book-sale?sort=asc&&limit=15");
     const [CardShop, setCardShop] = useState([]);
-     
+    const [Category, setCategory] = useState([]);
+    const [selectCategory, setSelectCategory] = useState([]);
+    const [Author, setAuthor] = useState([]);
+    const [selectAuthor, setSelectAuthor] = useState([]); 
     useEffect(() => {
         if (selectsorts === "sale") {
             setUrlsort("get-book-sale?sort=asc");
@@ -33,24 +37,24 @@ export default function ProductComponent(props) {
         } else if (selectShow === "30") {
             setUrlshow("30");
         }
-        // setUrlrating = selectRating ? "&&star=".selectRating : ''
+        // let star=`&&star=${selectRating}`;
+        // setUrlrating = selectRating ? star : '' ;
         if (selectRating === 1) {
-            setUrlrating("&&star="+selectRating);
+            setUrlrating("&&star=" + selectRating);
         } else if (selectRating === 2) {
-            setUrlrating("&&star="+selectRating);
+            setUrlrating("&&star=" + selectRating);
         } else if (selectRating === 3) {
-            setUrlrating("&&star="+selectRating);
+            setUrlrating("&&star=" + selectRating);
         } else if (selectRating === 4) {
-            setUrlrating("&&star="+selectRating);
-        }else if (selectRating === 5) {
-            setUrlrating("&&star="+selectRating);
-        } else{
-            setUrlrating("")
+            setUrlrating("&&star=" + selectRating);
+        } else if (selectRating === 5) {
+            setUrlrating("&&star=" + selectRating);
+        } else {
+            setUrlrating("");
         }
 
-            setUrl(urllsort + "&&limit=" + urllshow+ urllrating);
-        // console.log(urllrating);
-    });
+        setUrl(urllsort + "&&limit=" + urllshow); 
+    }); 
     useEffect(() => {
         const getCardShop = async () => {
             const results = await bookServices.getListBooks(urll);
@@ -58,13 +62,41 @@ export default function ProductComponent(props) {
         };
         getCardShop();
     }, [urll]);
+    // useEffect(() => {
+    //     const getCategory = async () => {
+    //         const results = await bookServices.getListBooks('get-author-category');
+    //         setCategory(results.category);
+    //         setAuthor(results.author);
+    //     };
+    //     getCategory();
+    // });
     const slides = CardShop.map((book, index) => {
         return (
-            <div className="single-product">
+            <div key={index} className="single-product">
                 <CardBook detailBook={book} />
             </div>
         );
     });
+    // const category = Category.map((item, index) => {
+    //     return (
+    //         <> 
+    //             <div key={index} className="single-Checkbox">
+    //                 <Checkbox value={item.category_id} />
+    //                 <a>{item.category_name}</a>
+    //             </div>
+    //         </>
+    //     );
+    // }); 
+    // const author = Author.map((item, index) => {
+    //     return (
+    //         <> 
+    //             <div key={index} className="single-Checkbox">
+    //                 <Checkbox value={item.author_id} />
+    //                 <a>{item.author_name}</a>
+    //             </div>
+    //         </>
+    //     );
+    // }); 
     return (
         <div className="Main-Product">
             <div className="title-book">
@@ -106,46 +138,48 @@ export default function ProductComponent(props) {
                 <div className="Product-container">
                     <div className="Checkbox-container">
                         <div className="Product-Checkbox">
-                            <a className="Checkbox-text">Hoang</a>
+                            <a className="Checkbox-text">Category</a>
                             <div className="single-Checkbox">
-                                <Checkbox onChange={() => getValue()} />
-                                <a>Product</a>
+                                
                             </div>
                         </div>
                         <div className="Product-Checkbox">
-                            <a className="Checkbox-text">Nguyen</a>
+                            <a className="Checkbox-text">Author</a>
                             <div className="single-Checkbox">
-                                <Checkbox onChange={() => getValue()} />
-                                <a>Product</a>
-                            </div>
-                            <div className="single-Checkbox">
-                                <Checkbox onChange={() => getValue()} />
-                                <a>Product</a>
-                            </div>
-                            <div className="single-Checkbox">
-                                <Checkbox onChange={() => getValue()} />
-                                <a>Product</a>
-                            </div>
+                              
+                            </div> 
                         </div>
                         <div className="Product-Checkbox">
-                            <a className="Checkbox-text">Rating</a> 
+                            <a className="Checkbox-text">Rating</a>
                             <div className="single-Checkbox">
-                                <Checkbox value={1} onChange={(e) =>setSelectRating(1)}/>
+                                <Checkbox
+                                    value={1}
+                                    onChange={(e) => setSelectRating(1)}
+                                />
                                 <a>1</a>
                             </div>
                             <div className="single-Checkbox">
-                                <Checkbox onChange={(e) => setSelectRating(2)} />
+                                <Checkbox
+                                    onChange={(e) => setSelectRating(2)}
+                                />
                                 <a>2</a>
                             </div>
                             <div className="single-Checkbox">
-                                <Checkbox onChange={(e) => setSelectRating(3)} />
+                                <Checkbox
+                                    onChange={(e) => setSelectRating(3)}
+                                />
                                 <a>3</a>
-                            </div><div className="single-Checkbox">
-                                <Checkbox onChange={(e) => setSelectRating(4)} />
+                            </div>
+                            <div className="single-Checkbox">
+                                <Checkbox
+                                    onChange={(e) => setSelectRating(4)}
+                                />
                                 <a>4</a>
                             </div>
                             <div className="single-Checkbox">
-                                <Checkbox onChange={(e) => setSelectRating(5)} />
+                                <Checkbox
+                                    onChange={(e) => setSelectRating(5)}
+                                />
                                 <a>5</a>
                             </div>
                         </div>

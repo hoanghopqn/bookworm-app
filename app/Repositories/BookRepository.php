@@ -2,8 +2,17 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\AuthorCollection;
+use App\Http\Resources\AuthorResource;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\BookResource;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ReviewCollection;
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\Review;
 use Psy\Readline\Hoa\Console;
 
 class BookRepository
@@ -85,4 +94,23 @@ class BookRepository
       $query = new BookCollection($query);
       return response()->json(['book' => $query], 200);
    }
+   public function getBookDetails($id)
+    {
+    $book = Book::getDetail()->findOrFail($id);
+    $book = new BookResource($book);  
+    return response()->json([
+        'book'=>$book
+    ],200) ;
+    } 
+    public function getAuthorCategory()
+    {
+    $category = Category::category()->get();
+    $category = new CategoryCollection($category);  
+    $author = Author::author()->get();
+    $author = new AuthorCollection($author);  
+    return response()->json([ 
+      'category'=>$category,
+      'author'=>$author
+    ],200) ;
+    } 
 }

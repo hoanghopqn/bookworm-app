@@ -13,5 +13,17 @@
     }
     .price{
         font-size: 15px;
+        .style-price{
+            text-decoration:line-through !important;
+            margin-right: 20px !important;
+            color: black !important;
+        }
+        .discount_price{
+            display: none;
+        }
+        .discount{
+            text-decoration: none;
+            color: black !important;
+        }
     }
 }

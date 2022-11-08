@@ -8,6 +8,9 @@ import HeaderComponent from "../components/header";
 import FinalComponent from "../components/final";  
 
 export default function App(){
+  
+  // const booka = JSON.parse(localStorage.getItem("book_id")); 
+  // console.log(booka);
     return(
       <React.Fragment>
       <HeaderComponent/> 
@@ -15,7 +18,7 @@ export default function App(){
         <Routes> 
         <Route path="/"element={<Home/>} />  
         <Route path="/about" element={<About />} />   
-        <Route path="/shop" element={<Shop />} />  
+        <Route path="/shop"element={<Shop />} />  
         <Route path="/shop/Card" element={<Card />} />  
         </Routes>
       </div>

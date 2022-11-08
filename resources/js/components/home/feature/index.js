@@ -27,7 +27,7 @@ export default function FeatureComponent(props) {
 
     const slides0 = Feature.map((book, index) => {
         return (
-            <div className="single-product">
+            <div key={index} className="single-product">
                 <CardBook detailBook={book} />
             </div>
         );
