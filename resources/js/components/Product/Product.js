@@ -62,14 +62,14 @@ export default function ProductComponent(props) {
         };
         getCardShop();
     }, [urll]);
-    // useEffect(() => {
-    //     const getCategory = async () => {
-    //         const results = await bookServices.getListBooks('get-author-category');
-    //         setCategory(results.category);
-    //         setAuthor(results.author);
-    //     };
-    //     getCategory();
-    // });
+    useEffect(() => {
+        const getCategory = async () => {
+            const results = await bookServices.getListBooks('get-author-category');
+            setCategory(results.category);
+            setAuthor(results.author);
+        };
+        getCategory();
+    });
     const slides = CardShop.map((book, index) => {
         return (
             <div key={index} className="single-product">
@@ -77,26 +77,26 @@ export default function ProductComponent(props) {
             </div>
         );
     });
-    // const category = Category.map((item, index) => {
-    //     return (
-    //         <> 
-    //             <div key={index} className="single-Checkbox">
-    //                 <Checkbox value={item.category_id} />
-    //                 <a>{item.category_name}</a>
-    //             </div>
-    //         </>
-    //     );
-    // }); 
-    // const author = Author.map((item, index) => {
-    //     return (
-    //         <> 
-    //             <div key={index} className="single-Checkbox">
-    //                 <Checkbox value={item.author_id} />
-    //                 <a>{item.author_name}</a>
-    //             </div>
-    //         </>
-    //     );
-    // }); 
+    const category = Category.map((item, index) => {
+        return (
+            <> 
+                <div key={index} className="single-Checkbox">
+                    <Checkbox value={item.category_id} />
+                    <a>{item.category_name}</a>
+                </div>
+            </>
+        );
+    }); 
+    const author = Author.map((item, index) => {
+        return (
+            <> 
+                <div key={index} className="single-Checkbox">
+                    <Checkbox value={item.author_id} />
+                    <a>{item.author_name}</a>
+                </div>
+            </>
+        );
+    }); 
     return (
         <div className="Main-Product">
             <div className="title-book">
@@ -140,13 +140,13 @@ export default function ProductComponent(props) {
                         <div className="Product-Checkbox">
                             <a className="Checkbox-text">Category</a>
                             <div className="single-Checkbox">
-                                
+                                {category}
                             </div>
                         </div>
                         <div className="Product-Checkbox">
                             <a className="Checkbox-text">Author</a>
                             <div className="single-Checkbox">
-                              
+                              {author}
                             </div> 
                         </div>
                         <div className="Product-Checkbox">

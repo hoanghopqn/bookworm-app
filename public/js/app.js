@@ -16692,6 +16692,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function ProductComponent(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
     _useState2 = _slicedToArray(_useState, 2),
@@ -16803,14 +16804,33 @@ function ProductComponent(props) {
     }();
     getCardShop();
   }, [urll]);
-  // useEffect(() => {
-  //     const getCategory = async () => {
-  //         const results = await bookServices.getListBooks('get-author-category');
-  //         setCategory(results.category);
-  //         setAuthor(results.author);
-  //     };
-  //     getCategory();
-  // });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var getCategory = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var results;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_2__.getListBooks('get-author-category');
+              case 2:
+                results = _context2.sent;
+                setCategory(results.category);
+                setAuthor(results.author);
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+      return function getCategory() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+    getCategory();
+  });
   var slides = CardShop.map(function (book, index) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "single-product",
@@ -16819,26 +16839,30 @@ function ProductComponent(props) {
       })
     }, index);
   });
-  // const category = Category.map((item, index) => {
-  //     return (
-  //         <> 
-  //             <div key={index} className="single-Checkbox">
-  //                 <Checkbox value={item.category_id} />
-  //                 <a>{item.category_name}</a>
-  //             </div>
-  //         </>
-  //     );
-  // }); 
-  // const author = Author.map((item, index) => {
-  //     return (
-  //         <> 
-  //             <div key={index} className="single-Checkbox">
-  //                 <Checkbox value={item.author_id} />
-  //                 <a>{item.author_name}</a>
-  //             </div>
-  //         </>
-  //     );
-  // }); 
+  var category = Category.map(function (item, index) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "single-Checkbox",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          value: item.category_id
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+          children: item.category_name
+        })]
+      }, index)
+    });
+  });
+  var author = Author.map(function (item, index) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "single-Checkbox",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          value: item.author_id
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+          children: item.author_name
+        })]
+      }, index)
+    });
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "Main-Product",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -16908,7 +16932,8 @@ function ProductComponent(props) {
               className: "Checkbox-text",
               children: "Category"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "single-Checkbox"
+              className: "single-Checkbox",
+              children: category
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "Product-Checkbox",
@@ -16916,7 +16941,8 @@ function ProductComponent(props) {
               className: "Checkbox-text",
               children: "Author"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "single-Checkbox"
+              className: "single-Checkbox",
+              children: author
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "Product-Checkbox",
