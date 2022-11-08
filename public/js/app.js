@@ -16095,6 +16095,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function FindReview(props) {
   var review = props.review;
+  var cardb = props.cardb;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
     _useState2 = _slicedToArray(_useState, 2),
     selectShow = _useState2[0],
@@ -16107,6 +16108,15 @@ function FindReview(props) {
     review_details = review.review_details,
     review_date = review.review_date,
     rating_start = review.rating_start;
+  var count_star = cardb.count_star,
+    count1star = cardb.count1star,
+    count2star = cardb.count2star,
+    count3star = cardb.count3star,
+    count4star = cardb.count4star,
+    count5star = cardb.count5star,
+    avg_stars = cardb.avg_stars,
+    AR = cardb.AR,
+    count_review = cardb.count_review;
   var reviews = review.map(function (item, index) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "body-Review",
@@ -16130,7 +16140,7 @@ function FindReview(props) {
         className: "date",
         children: item.review_date
       })]
-    });
+    }, index);
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "Single-Review",
@@ -16143,29 +16153,29 @@ function FindReview(props) {
           children: "Customer Reviews (Filtered by 5 star)"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "avg-star",
-          children: "avgstar Star"
+          children: avg_stars
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "star-Review",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "count",
-            children: "count"
+            children: ["(", count_review, ")"]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "count-star",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "count-5",
-              children: " 5 star "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: '  5 star(' + count1star + ')'
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "count-4",
-              children: " 4 star"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: [" ", '  4 star(' + count2star + ')']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "count-3",
-              children: " 3 star"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: [" ", '  3 star(' + count3star + ')']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "count-2",
-              children: " 2 star"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              children: [" ", '  2 star(' + count4star + ')']
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "count-1",
-              children: " 1 star"
+              children: [" ", '  1 star(' + count5star + ')']
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -16692,7 +16702,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function ProductComponent(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
     _useState2 = _slicedToArray(_useState, 2),
@@ -16813,11 +16822,11 @@ function ProductComponent(props) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_2__.getListBooks('get-author-category');
+                return _apiServices_bookServices__WEBPACK_IMPORTED_MODULE_2__.getListBooks("get-author-category");
               case 2:
                 results = _context2.sent;
-                setCategory(results.category);
                 setAuthor(results.author);
+                setCategory(results.category);
               case 5:
               case "end":
                 return _context2.stop();
@@ -16840,24 +16849,22 @@ function ProductComponent(props) {
     }, index);
   });
   var category = Category.map(function (item, index) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "single-Checkbox",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "single-Checkbox",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          value: item.category_id
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
           children: item.category_name
         })]
       }, index)
     });
   });
   var author = Author.map(function (item, index) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "single-Checkbox",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "single-Checkbox",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          value: item.author_id
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
           children: item.author_name
         })]
       }, index)
@@ -16931,19 +16938,13 @@ function ProductComponent(props) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               className: "Checkbox-text",
               children: "Category"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "single-Checkbox",
-              children: category
-            })]
+            }), category]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "Product-Checkbox",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               className: "Checkbox-text",
               children: "Author"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "single-Checkbox",
-              children: author
-            })]
+            }), author]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "Product-Checkbox",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
@@ -17191,6 +17192,7 @@ var Card = function Card() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Card_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
       cardb: cardb
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Review_index__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      cardb: cardb,
       review: review
     })]
   });
@@ -17589,7 +17591,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".Single-Review {\n  margin-top: 10px;\n  margin-left: 200px;\n  margin-right: 200px;\n  display: flex;\n}\n.Single-Review .main-Review {\n  display: block;\n  border: 2px solid black;\n  width: 600px;\n}\n.Single-Review .main-Review .header-Review {\n  margin-top: 20px;\n  margin-left: 30px;\n}\n.Single-Review .main-Review .header-Review .customer-Reviews {\n  font-weight: bold;\n}\n.Single-Review .main-Review .header-Review .avg-star {\n  font-weight: bold;\n}\n.Single-Review .main-Review .header-Review .review-fillter {\n  display: flex;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.Single-Review .main-Review .header-Review .review-fillter .select {\n  margin-left: 85px;\n}\n.Single-Review .main-Review .header-Review .review-fillter .select .select-show {\n  margin-left: 30px;\n}\n.Single-Review .main-Review .header-Review .star-Review {\n  display: flex;\n}\n.Single-Review .main-Review .header-Review .star-Review .count-star {\n  display: flex;\n}\n.Single-Review .main-Review .body-Review {\n  margin: 20px;\n}\n.Single-Review .main-Review .body-Review .Review-title {\n  font-weight: bold;\n  display: flex;\n  font-size: 16px;\n}\n.Single-Review .Review {\n  width: 250px;\n  height: 200px;\n  display: block;\n  border: 2px solid black;\n  margin-left: 100px;\n}\n.Single-Review .Review .review-write {\n  border-bottom: 2px solid black;\n  margin-bottom: 10px;\n  font-weight: bold;\n}\n.Single-Review .Review .button {\n  margin: 10px 60px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".Single-Review {\n  margin-top: 10px;\n  margin-left: 200px;\n  margin-right: 200px;\n  display: flex;\n}\n.Single-Review .main-Review {\n  display: block;\n  border: 2px solid black;\n  width: 600px;\n}\n.Single-Review .main-Review .header-Review {\n  margin-top: 20px;\n  margin-left: 30px;\n}\n.Single-Review .main-Review .header-Review .customer-Reviews {\n  font-weight: bold;\n}\n.Single-Review .main-Review .header-Review .avg-star {\n  font-weight: bold;\n}\n.Single-Review .main-Review .header-Review .review-fillter {\n  display: flex;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.Single-Review .main-Review .header-Review .review-fillter .select {\n  margin-left: 85px;\n}\n.Single-Review .main-Review .header-Review .review-fillter .select .select-show {\n  margin-left: 30px;\n}\n.Single-Review .main-Review .header-Review .star-Review {\n  display: flex;\n}\n.Single-Review .main-Review .header-Review .star-Review .count {\n  font-size: 15px;\n  font-weight: bold;\n}\n.Single-Review .main-Review .header-Review .star-Review .count-star {\n  display: flex;\n}\n.Single-Review .main-Review .header-Review .star-Review .count-star div {\n  margin-left: 10px;\n}\n.Single-Review .main-Review .body-Review {\n  margin: 20px;\n}\n.Single-Review .main-Review .body-Review .Review-title {\n  font-weight: bold;\n  display: flex;\n  font-size: 16px;\n}\n.Single-Review .Review {\n  width: 250px;\n  height: 200px;\n  display: block;\n  border: 2px solid black;\n  margin-left: 100px;\n}\n.Single-Review .Review .review-write {\n  border-bottom: 2px solid black;\n  margin-bottom: 10px;\n  font-weight: bold;\n}\n.Single-Review .Review .button {\n  margin: 10px 60px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

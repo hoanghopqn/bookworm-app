@@ -35,8 +35,16 @@
       }
             .star-Review{
                   display: flex;
+                  .count{
+                        font-size: 15px;
+                        font-weight: bold;
+
+                  }
          .count-star{
             display: flex;
+            div{
+                  margin-left: 10px;
+            }
 
          }
       }

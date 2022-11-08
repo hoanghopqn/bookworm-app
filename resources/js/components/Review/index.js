@@ -4,17 +4,19 @@ import "./style.scss";
 
 export default function FindReview(props) {
     const { review } = props;
+    const { cardb } = props;
     const [selectShow, setSelectShow] = useState();
     const [selectsorts, setSelectsSorts] = useState();
     const { 
         review_title,
         review_details,
         review_date,
-        rating_start 
+        rating_start,
     } = review; 
+    const { count_star, count1star, count2star, count3star,count4star,count5star,avg_stars,AR,  count_review  } = cardb;
     const reviews = review.map((item, index) => {
         return (
-            <div className="body-Review">
+            <div key={index} className="body-Review">
                     <div className="Review-title">
                         <div className="title">{item.review_title}</div>
                         <div className=""></div>
@@ -32,15 +34,15 @@ export default function FindReview(props) {
                     <div className="customer-Reviews">
                         Customer Reviews (Filtered by 5 star)
                     </div>
-                    <div className="avg-star">avgstar Star</div>
+                    <div className="avg-star">{avg_stars}</div>
                     <div className="star-Review">
-                        <div className="count">count</div>
+                        <div className="count">({count_review})</div>
                         <div className="count-star">
-                            <div className="count-5"> 5 star </div>
-                            <div className="count-4"> 4 star</div>
-                            <div className="count-3"> 3 star</div>
-                            <div className="count-2"> 2 star</div>
-                            <div className="count-1"> 1 star</div>
+                            <div className="count-5">{'  5 star('+count1star+')'}</div>
+                            <div className="count-4"> {'  4 star('+count2star+')'}</div>
+                            <div className="count-3"> {'  3 star('+count3star+')'}</div>
+                            <div className="count-2"> {'  2 star('+count4star+')'}</div>
+                            <div className="count-1"> {'  1 star('+count5star+')'}</div>
                         </div>
                     </div>
                     <div className="review-fillter"> 

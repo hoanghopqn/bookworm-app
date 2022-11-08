@@ -27,7 +27,7 @@ export const Card = () => {
     return (
         <>
             <FindCard cardb={cardb} />
-            <FindReview review={review}/>
+            <FindReview cardb={cardb} review={review}/>
         </>
     );
 };
